@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JPMC Atm Locator</string>
+    <string name="title_activity_atm_locations">JPMC Atm Locations</string>
+</resources>
