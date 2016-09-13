@@ -16,14 +16,14 @@ public class Location implements Serializable{
     private String lng;
     private String bank;
     private String type;
-    private List<String> lobbyHrs = new ArrayList<String>();
-    private List<String> driveUpHrs = new ArrayList<String>();
+    private List<String> lobbyHrs = new ArrayList<>();
+    private List<String> driveUpHrs = new ArrayList<>();
     private Integer atms;
-    private List<String> services = new ArrayList<String>();
+    private List<String> services = new ArrayList<>();
     private String phone;
     private Double distance;
     private String access;
-    private List<String> languages = new ArrayList<String>();
+    private List<String> languages = new ArrayList<>();
 
     /**
      *

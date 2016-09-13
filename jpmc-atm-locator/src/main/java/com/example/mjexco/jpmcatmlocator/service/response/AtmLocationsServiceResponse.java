@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AtmLocationsServiceResponse {
-    private List<Errors> errors = new ArrayList<Errors>();
-    private List<Location> locations = new ArrayList<Location>();
+    private List<Errors> errors = new ArrayList<>();
+    private List<Location> locations = new ArrayList<>();
 
     /**
      *
