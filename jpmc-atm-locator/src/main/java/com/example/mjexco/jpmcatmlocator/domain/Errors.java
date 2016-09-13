@@ -1,8 +1,5 @@
 package com.example.mjexco.jpmcatmlocator.domain;
 
-/**
- * Created by mj exco on 9/12/2016.
- */
 public class Errors {
     private String issueType;
     private Object actionCode;

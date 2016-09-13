@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mj exco on 9/12/2016.
- */
 public class Location implements Serializable{
     private String state;
     private String locType;
@@ -22,7 +19,7 @@ public class Location implements Serializable{
     private List<String> lobbyHrs = new ArrayList<String>();
     private List<String> driveUpHrs = new ArrayList<String>();
     private Integer atms;
-    private List<Object> services = new ArrayList<Object>();
+    private List<String> services = new ArrayList<String>();
     private String phone;
     private Double distance;
     private String access;
@@ -214,6 +211,9 @@ public class Location implements Serializable{
      * The type
      */
     public String getType() {
+        if(type == null){
+            return "";
+        }
         return type;
     }
 
@@ -285,7 +285,7 @@ public class Location implements Serializable{
      * @return
      * The services
      */
-    public List<Object> getServices() {
+    public List<String> getServices() {
         return services;
     }
 
@@ -294,7 +294,7 @@ public class Location implements Serializable{
      * @param services
      * The services
      */
-    public void setServices(List<Object> services) {
+    public void setServices(List<String> services) {
         this.services = services;
     }
 
@@ -340,6 +340,9 @@ public class Location implements Serializable{
      * The access
      */
     public String getAccess() {
+        if(access == null){
+            return "";
+        }
         return access;
     }
 
@@ -359,6 +362,42 @@ public class Location implements Serializable{
      */
     public List<String> getLanguages() {
         return languages;
+    }
+
+    /**
+     *
+     * @return
+     * If services is returned
+     */
+    public boolean hasServices() {
+        if(services.size() == 0){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @return
+     * If lobbyHrs is returned
+     */
+    public boolean hasLobbyHrs() {
+        if(lobbyHrs.size() == 0){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @return
+     * If driveUpHrs is returned
+     */
+    public boolean hasDriveUpHrs() {
+        if(driveUpHrs.size() == 0){
+            return false;
+        }
+        return true;
     }
 
     /**

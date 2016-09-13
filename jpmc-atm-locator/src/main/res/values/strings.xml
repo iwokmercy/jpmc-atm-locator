@@ -2,4 +2,7 @@
     <string name="app_name">JPMC Atm Locator</string>
     <string name="title_activity_atm_locations">JPMC Atm Locations</string>
     <string name="title_activity_atm_details">Atm Details</string>
+    <string name="services_label">Services</string>
+    <string name="lobby_label">Lobby Hours</string>
+    <string name="driveup_label">Drive-Up Hours</string>
 </resources>

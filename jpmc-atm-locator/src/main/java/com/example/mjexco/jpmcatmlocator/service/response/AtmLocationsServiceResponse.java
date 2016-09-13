@@ -7,9 +7,6 @@ import com.example.mjexco.jpmcatmlocator.domain.Location;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mj exco on 9/12/2016.
- */
 public class AtmLocationsServiceResponse {
     private List<Errors> errors = new ArrayList<Errors>();
     private List<Location> locations = new ArrayList<Location>();

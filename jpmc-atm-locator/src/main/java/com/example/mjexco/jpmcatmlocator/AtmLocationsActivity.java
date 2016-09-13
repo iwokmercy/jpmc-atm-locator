@@ -65,14 +65,13 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
 
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+                .setInterval(600000)        // 10 minutes, in milliseconds
+                .setFastestInterval(60000); // 1 minute, in milliseconds
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //setUpMapIfNeeded();
         mGoogleApiClient.connect();
     }
 
@@ -142,7 +141,6 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
                 }
             }
         } else {
-            //Toast.makeText(this, "Location permission denied, you cannot use this app", Toast.LENGTH_LONG).show();
             new AlertDialog.Builder(AtmLocationsActivity.this)
                     .setTitle("Location Error")
                     .setMessage("Location permission denied, you cannot use this app")
@@ -180,7 +178,6 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
     private void handleNewLocation(Location location) {
         double currentUserLatitude = location.getLatitude();
         double currentUserLongitude = location.getLongitude();
-        //https://m.chase.com/PSRWeb/location/list.action?lat=40.147864&lng=-82.990959
 
         //move camera to general user location
         LatLng userLocation = new LatLng(currentUserLatitude, currentUserLongitude);
@@ -207,8 +204,6 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody, StandardCharsets.UTF_8);
-                //JsonResponse json = gson.fromJson(response, JsonResponse.class);
-                //JSONObject responseObject = new JSONObject(response);
                 Gson gson = new Gson();
                 json = gson.fromJson(response, AtmLocationsServiceResponse.class);
                 final LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -226,9 +221,7 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
                                 .snippet(location.getName());
                         mMap.addMarker(options);
                         builder.include(latLng);
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     }
-                    //CameraUpdateFactory.zoomTo(10.0f);
                     LatLngBounds bounds = builder.build();
                     final CameraUpdate cu = CameraUpdateFactory.zoomTo(12.0f);
                     mMap.animateCamera(cu);
@@ -261,6 +254,4 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
     public void onLocationChanged(Location location) {
         handleNewLocation(location);
     }
-
-
 }
