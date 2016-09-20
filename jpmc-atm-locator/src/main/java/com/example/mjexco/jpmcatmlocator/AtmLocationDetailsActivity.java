@@ -30,7 +30,14 @@ public class AtmLocationDetailsActivity extends AppCompatActivity {
         selectedLocation = (Location) intent.getSerializableExtra("AtmDetails");
         Log.d("Location", selectedLocation.toString());
 
-        getSupportActionBar().setTitle("ATM (" + selectedLocation.getName() + ")");
+        /**
+         * Differentiate between bank branches and stand-alone ATMs
+         */
+        if(selectedLocation.getLocType().equals("branch")){
+            getSupportActionBar().setTitle("BRANCH (" + selectedLocation.getName() + ")");
+        } else {
+            getSupportActionBar().setTitle("ATM (" + selectedLocation.getName() + ")");
+        }
 
         populateAddressSection();
     }
@@ -40,22 +47,22 @@ public class AtmLocationDetailsActivity extends AppCompatActivity {
      */
     private void populateAddressSection() {
         LinearLayout addressSectionLayout = (LinearLayout)findViewById(R.id.atm_info_details);
-        ViewGroup parentGroup = parentGroup = (ViewGroup)addressSectionLayout;
+        ViewGroup parentGroup = (ViewGroup)addressSectionLayout;
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         for(int i=0; i<6; i++){
             if(i==0){
                 parentGroup.addView(createMediaItem(inflater, 0));
             } else if(i==1){
-                parentGroup.addView(createTextItem(inflater, "Bank: " + selectedLocation.getBank()));
+                parentGroup.addView(createTextItem(inflater, getString(R.string.bank_txt) + selectedLocation.getBank()));
             }else if(i==2){
                 parentGroup.addView(createMediaItem(inflater, 1));
             }else if(i==3){
-                parentGroup.addView(createTextItem(inflater, "Distance: " + selectedLocation.getDistance()));
+                parentGroup.addView(createTextItem(inflater, getString(R.string.dist_txt) + selectedLocation.getDistance()));
             }else if(i==4){
-                parentGroup.addView(createTextItem(inflater, "Access: " + selectedLocation.getAccess()));
+                parentGroup.addView(createTextItem(inflater, getString(R.string.access_txt) + selectedLocation.getAccess()));
             }else{
-                parentGroup.addView(createTextItem(inflater, "Type: " + selectedLocation.getType()));
+                parentGroup.addView(createTextItem(inflater, getString(R.string.type_txt) + selectedLocation.getType()));
             }
         }
         populateServiceDetails();
@@ -97,7 +104,7 @@ public class AtmLocationDetailsActivity extends AppCompatActivity {
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }else{
-                    Toast.makeText(AtmLocationDetailsActivity.this, "You do not have a GPS app on your phone", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AtmLocationDetailsActivity.this, R.string.gps_app_err, Toast.LENGTH_LONG).show();
                 }
             }
         };
@@ -112,7 +119,7 @@ public class AtmLocationDetailsActivity extends AppCompatActivity {
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }else{
-                    Toast.makeText(AtmLocationDetailsActivity.this, "You do not have an app for making calls on your phone", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AtmLocationDetailsActivity.this, R.string.phone_app_err, Toast.LENGTH_LONG).show();
                 }
             }
         };
@@ -139,7 +146,7 @@ public class AtmLocationDetailsActivity extends AppCompatActivity {
      */
     private void populateServiceDetails() {
         LinearLayout addressSectionLayout = (LinearLayout)findViewById(R.id.atm_service_details);
-        ViewGroup parentGroup = parentGroup = (ViewGroup)addressSectionLayout;
+        ViewGroup parentGroup = (ViewGroup)addressSectionLayout;
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(selectedLocation.hasServices()){
@@ -162,7 +169,7 @@ public class AtmLocationDetailsActivity extends AppCompatActivity {
      */
     private void populateLobbyHoursDetails() {
         LinearLayout addressSectionLayout = (LinearLayout)findViewById(R.id.atmlb_hrs_details);
-        ViewGroup parentGroup = parentGroup = (ViewGroup) addressSectionLayout;
+        ViewGroup parentGroup = (ViewGroup) addressSectionLayout;
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(selectedLocation.hasLobbyHrs()){
@@ -185,7 +192,7 @@ public class AtmLocationDetailsActivity extends AppCompatActivity {
      */
     private void populateDriveUpHours() {
         LinearLayout addressSectionLayout = (LinearLayout)findViewById(R.id.atmdu_hrs_details);
-        ViewGroup parentGroup = parentGroup = (ViewGroup)addressSectionLayout;
+        ViewGroup parentGroup = (ViewGroup)addressSectionLayout;
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(selectedLocation.hasDriveUpHrs()){

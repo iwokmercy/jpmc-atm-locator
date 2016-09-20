@@ -5,4 +5,14 @@
     <string name="services_label">Services</string>
     <string name="lobby_label">Lobby Hours</string>
     <string name="driveup_label">Drive-Up Hours</string>
+    <string name="phone_app_err">You do not have an app for making calls on your phone</string>
+    <string name="gps_app_err">You do not have a GPS app on your phone</string>
+    <string name="bank_txt">"Bank: "</string>
+    <string name="dist_txt">"Distance: "</string>
+    <string name="access_txt">"Access: "</string>
+    <string name="type_txt">"Type: "</string>
+    <string name="wait_msg">Please wait…</string>
+    <string name="loc_err_title">Location Error</string>
+    <string name="loc_err_msg">Location permission denied, you cannot use this app</string>
+    <string name="serv_url">https://m.chase.com/PSRWeb/location/list.action</string>
 </resources>

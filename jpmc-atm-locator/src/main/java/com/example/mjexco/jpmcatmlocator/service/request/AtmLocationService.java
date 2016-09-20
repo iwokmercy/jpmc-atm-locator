@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
+import com.example.mjexco.jpmcatmlocator.R;
 import com.example.mjexco.jpmcatmlocator.domain.Location;
 import com.example.mjexco.jpmcatmlocator.service.response.AtmLocationsServiceResponse;
 import com.google.android.gms.maps.CameraUpdate;
@@ -67,7 +68,7 @@ public class AtmLocationService {
      */
     public void makeAtmLocationServiceCall(final Context context, String url, RequestParams requestParams, final GoogleMap map){
         final ProgressDialog mDialog = new ProgressDialog(context);
-        mDialog.setMessage("Please wait..");
+        mDialog.setMessage(context.getString(R.string.wait_msg));
         mDialog.show();
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -100,7 +101,7 @@ public class AtmLocationService {
                 }
                 else{
                     new AlertDialog.Builder(context)
-                            .setTitle("Location Error")
+                            .setTitle(context.getString(R.string.loc_err_title))
                             .setMessage(json.getErrors().get(0).getMessage())
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 
@@ -79,7 +80,7 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
         if (grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //app has required permissions so go ahead and get user location
@@ -87,8 +88,8 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
         } else {
             //app permissions denied, throw error and close app
             new AlertDialog.Builder(AtmLocationsActivity.this)
-                    .setTitle("Location Error")
-                    .setMessage("Location permission denied, you cannot use this app")
+                    .setTitle(getString(R.string.loc_err_title))
+                    .setMessage(getString(R.string.loc_err_msg))
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -114,14 +115,13 @@ public class AtmLocationsActivity extends FragmentActivity implements OnMapReady
         LatLng userLocation = new LatLng(currentUserLatitude, currentUserLongitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
 
-        String url = "https://m.chase.com/PSRWeb/location/list.action";
         // Instantiate Http Request Param Object
         RequestParams params = new RequestParams();
         params.put("lat", currentUserLatitude);
         params.put("lng", currentUserLongitude);
 
         // make service call to retrieve atm locations
-        AtmLocationService.getInstance().makeAtmLocationServiceCall(this, url, params, mMap);
+        AtmLocationService.getInstance().makeAtmLocationServiceCall(this, getString(R.string.serv_url), params, mMap);
 
     }
 }
